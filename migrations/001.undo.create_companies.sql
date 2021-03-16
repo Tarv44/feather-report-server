@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS companies CASCADE;
+DROP TABLE IF EXISTS rotation_exchanges CASCADE;

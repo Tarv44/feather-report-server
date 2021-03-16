@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS product_features CASCADE;
+DROP TABLE IF EXISTS features CASCADE;
