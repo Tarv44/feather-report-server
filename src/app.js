@@ -21,8 +21,8 @@ app.use(cors())
 
 app.use('/api/categories', catRouter)
 app.use('/api/companies', compRouter)
-app.use('./api/products', prodRouter)
-app.use('./api/features', featRouter)
+app.use('/api/products', prodRouter)
+app.use('/api/features', featRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, world!')

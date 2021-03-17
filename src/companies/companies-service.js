@@ -20,6 +20,14 @@ const CompService = {
         .where('id', id)
         .first()
     },
+
+    getByPathname(knex, pathname) {
+        return knex
+          .from('companies')
+          .select('*')
+          .where('pathname', pathname)
+          .first()
+      },
   
     deleteCompany(knex, id) {
       return knex('companies')

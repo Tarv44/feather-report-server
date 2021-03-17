@@ -20,6 +20,14 @@ const FeatService = {
         .where('id', id)
         .first()
     },
+
+    getByProduct(knex, product) {
+      return knex
+        .from('product_features')
+        .join('features', 'product_features.feature', 'features.id' )
+        .select('title', 'features.id')
+        .where('product_features.product', product)
+    },
   
     deleteFeature(knex, id) {
       return knex('features')

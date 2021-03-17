@@ -20,6 +20,13 @@ const ProdService = {
         .where('id', id)
         .first()
     },
+
+    getByCompany(knex, company) {
+      return knex
+        .from('products')
+        .select('*')
+        .where('company', company)
+    },
   
     deleteProduct(knex, id) {
       return knex('products')

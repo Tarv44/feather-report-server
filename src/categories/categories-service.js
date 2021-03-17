@@ -20,6 +20,13 @@ const CatService = {
         .where('id', id)
         .first()
     },
+
+    getByCompany(knex, company) {
+      return knex
+        .from('categories')
+        .select('title', 'id')
+        .where('company', company)
+    },
   
     deleteCategory(knex, id) {
       return knex('categories')
