@@ -1,11 +1,11 @@
 const CompService = {
-    getAllCompanies(knex) {
+    getAllCompany(knex) {
       return knex.select('*').from('companies')
     },
   
-    insertComment(knex, newComment) {
+    insertCompany(knex, newCompany) {
       return knex
-        .insert(newComment)
+        .insert(newCompany)
         .into('companies')
         .returning('*')
         .then(rows => {
@@ -21,16 +21,16 @@ const CompService = {
         .first()
     },
   
-    deleteComment(knex, id) {
+    deleteCompany(knex, id) {
       return knex('companies')
         .where({ id })
         .delete()
     },
   
-    updateComment(knex, id, newCommentFields) {
+    updateCompany(knex, id, newCompanyFields) {
       return knex('companies')
         .where({ id })
-        .update(newCommentFields)
+        .update(newCompanyFields)
     },
   }
   

@@ -3,9 +3,9 @@ const FeatService = {
       return knex.select('*').from('features')
     },
   
-    insertComment(knex, newComment) {
+    insertFeature(knex, newFeature) {
       return knex
-        .insert(newComment)
+        .insert(newFeature)
         .into('features')
         .returning('*')
         .then(rows => {
@@ -21,16 +21,16 @@ const FeatService = {
         .first()
     },
   
-    deleteComment(knex, id) {
+    deleteFeature(knex, id) {
       return knex('features')
         .where({ id })
         .delete()
     },
   
-    updateComment(knex, id, newCommentFields) {
+    updateFeature(knex, id, newFeatureFields) {
       return knex('features')
         .where({ id })
-        .update(newCommentFields)
+        .update(newFeatureFields)
     },
   }
   

@@ -3,9 +3,9 @@ const CatService = {
       return knex.select('*').from('categories')
     },
   
-    insertComment(knex, newComment) {
+    insertCategory(knex, newCategory) {
       return knex
-        .insert(newComment)
+        .insert(newCategory)
         .into('categories')
         .returning('*')
         .then(rows => {
@@ -21,16 +21,16 @@ const CatService = {
         .first()
     },
   
-    deleteComment(knex, id) {
+    deleteCategory(knex, id) {
       return knex('categories')
         .where({ id })
         .delete()
     },
   
-    updateComment(knex, id, newCommentFields) {
+    updateCategory(knex, id, newCategoryFields) {
       return knex('categories')
         .where({ id })
-        .update(newCommentFields)
+        .update(newCategoryFields)
     },
   }
   

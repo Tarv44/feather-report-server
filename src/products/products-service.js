@@ -3,9 +3,9 @@ const ProdService = {
       return knex.select('*').from('products')
     },
   
-    insertComment(knex, newComment) {
+    insertProduct(knex, newProduct) {
       return knex
-        .insert(newComment)
+        .insert(newProduct)
         .into('products')
         .returning('*')
         .then(rows => {
@@ -21,16 +21,16 @@ const ProdService = {
         .first()
     },
   
-    deleteComment(knex, id) {
+    deleteProduct(knex, id) {
       return knex('products')
         .where({ id })
         .delete()
     },
   
-    updateComment(knex, id, newCommentFields) {
+    updateProduct(knex, id, newProductFields) {
       return knex('products')
         .where({ id })
-        .update(newCommentFields)
+        .update(newProductFields)
     },
   }
   
