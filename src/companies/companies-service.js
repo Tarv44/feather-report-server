@@ -27,7 +27,15 @@ const CompService = {
           .select('*')
           .where('pathname', pathname)
           .first()
-      },
+    },
+
+    getByEmail(knex, email) {
+        return knex
+          .from('companies')
+          .select('*')
+          .where('email', email)
+          .first()
+    },
   
     deleteCompany(knex, id) {
       return knex('companies')

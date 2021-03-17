@@ -1,4 +1,6 @@
 const path = require('path') //.location(path.posix.join(req.originalUrl, `/${user.id}`))
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 const express = require('express')
 const CompanyService = require('./companies-service')
 const ProductService = require('../products/products-service')
@@ -6,6 +8,60 @@ const FeaturesService = require('../features/features-service')
 const CategoryService = require('../categories/categories-service')
 
 const compRouter = express.Router()
+const jsonParser = express.json()
+
+compRouter
+    .route('/')
+    .post(jsonParser, (req, res, next) => {
+        const db = req.app.get('db')
+
+        const { title, email, pathname, password } = req.body
+        const newComp = { title, pathname, password, email}
+
+        for (const [key, value] of Object.entries(newComp)) {
+            if (!value) {
+                return res.status(400).json({
+                    error: { message: `Missing ${key} in request body.` }
+                })
+            }
+        }
+
+        newComp.email = email.toLowerCase()
+
+        CompanyService.getByPathname(db, pathname)
+            .then(co_from_path => {
+                if (co_from_path) {
+                    throw new Error('Pathname unavailable.')
+                }
+                CompanyService.getByEmail(db, newComp.email)
+                    .then(co_from_email => {
+                        if (co_from_email) {
+                            throw new Error('Account with email already exists')
+                        }
+                        bcrypt.hash(password, saltRounds)
+                            .then(hash => {
+                                newComp.password = hash
+                                CompanyService.insertCompany(db, newComp)
+                                    .then(comp => {
+                                        const { id, title, pathname, email } = comp
+                                        const response = { id, title, pathname, email }
+                                        res
+                                                    .status(201)
+                                                    .location(path.posix.join(req.originalUrl, `/${id}`))
+                                                    .json(response)
+                                    })
+                                    .catch(next)
+                            })
+                            .catch(next)
+                    })
+                    .catch(err => res.status(404).json({
+                        error: { message: err.message }
+                    }))
+            })
+            .catch(err => res.status(404).json({
+                error: { message: err.message }
+            }))
+    })
 
 compRouter
     .route('/:pathname/products')
