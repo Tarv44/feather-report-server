@@ -1,4 +1,4 @@
-const path = require('path') //.location(path.posix.join(req.originalUrl, `/${user.id}`))
+const path = require('path')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 const express = require('express')
@@ -6,12 +6,11 @@ const CompanyService = require('./companies-service')
 const ProductService = require('../products/products-service')
 const FeaturesService = require('../features/features-service')
 const CategoryService = require('../categories/categories-service')
-const { json } = require('express')
 
-const compRouter = express.Router()
+const CompRouter = express.Router()
 const jsonParser = express.json()
 
-compRouter
+CompRouter
     .route('/')
     .post(jsonParser, (req, res, next) => {
         const db = req.app.get('db')
@@ -47,9 +46,9 @@ compRouter
                                         const { id, title, pathname, email } = comp
                                         const response = { id, title, pathname, email }
                                         res
-                                                    .status(201)
-                                                    .location(path.posix.join(req.originalUrl, `/${id}`))
-                                                    .json(response)
+                                            .status(201)
+                                            .location(path.posix.join(req.originalUrl, `/${id}`))
+                                            .json(response)
                                     })
                                     .catch(next)
                             })
@@ -64,7 +63,7 @@ compRouter
             }))
     })
 
-compRouter
+CompRouter
     .route('/login')
     .post(jsonParser, (req, res, next) => {
         CompanyService.getByEmail(
@@ -102,7 +101,7 @@ compRouter
             })
     })
 
-compRouter
+CompRouter
     .route('/:pathname/products')
     .get((req, res, next) => {
         const db = req.app.get('db')
@@ -140,4 +139,4 @@ compRouter
             }))
     })
 
-module.exports = compRouter
+module.exports = CompRouter

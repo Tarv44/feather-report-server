@@ -12,7 +12,6 @@
     "start": "node src/server.js",
     "predeploy": "npm run migrate:production",
     "deploy": "git push heroku main",
-    "preseed": "npm run migrate -- 0 && npm run migrate",
     "seed": "psql -U jonahtarver -d feather_report -f ./seeds/seeds.feather_report.sql"
   },
   "keywords": [],

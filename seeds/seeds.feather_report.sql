@@ -1,10 +1,5 @@
 BEGIN;
 
-INSERT INTO companies (title, pathname, email, password)
-VALUES (
-    'Sid''s Kitchen Stuff', 'Sids', 'Sids@email.com', '1234'
-);
-
 INSERT INTO categories (title, company)
 VALUES
     ('Knives', 1),
