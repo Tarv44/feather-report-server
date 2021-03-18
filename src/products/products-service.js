@@ -12,6 +12,16 @@ const ProdService = {
           return rows[0]
         })
     },
+
+    insertProductFeatures(knex, feature) {
+      return knex
+        .insert(feature)
+        .into('product_features')
+        .returning('*')
+        .then(rows => {
+          return rows[0]
+        })
+    },
   
     getById(knex, id) {
       return knex
