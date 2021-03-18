@@ -1,8 +1,9 @@
 const path = require('path')
 const express = require('express')
 const jsonParser = express.json()
-const CatRouter = express.Router()
 const CatService = require('./categories-service')
+
+const CatRouter = express.Router()
 
 CatRouter
     .route('/')
@@ -23,6 +24,11 @@ CatRouter
                     .status(201)
                     .location(path.posix.join(req.originalUrl, `/${cat.id}`))
                     .json(cat)
+            })
+            .catch(err => {
+                return res.status(404).json({
+                    error: { message: 'Error adding to database.' }
+                })
             })
     })
 
