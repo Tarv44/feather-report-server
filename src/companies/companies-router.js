@@ -6,6 +6,7 @@ const CompanyService = require('./companies-service')
 const ProductService = require('../products/products-service')
 const FeaturesService = require('../features/features-service')
 const CategoryService = require('../categories/categories-service')
+const { json } = require('express')
 
 const compRouter = express.Router()
 const jsonParser = express.json()
@@ -61,6 +62,44 @@ compRouter
             .catch(err => res.status(404).json({
                 error: { message: err.message }
             }))
+    })
+
+compRouter
+    .route('/login')
+    .post(jsonParser, (req, res, next) => {
+        CompanyService.getByEmail(
+            req.app.get('db'),
+            req.body.email.toLowerCase() 
+        )
+            .then(comp => {
+                if (!comp) {
+                    throw new Error('Business with email does not exist.')
+                }
+                return comp
+            })
+            .then(comp => {
+                bcrypt
+                    .compare(req.body.password, comp.password)
+                    .then(result => {
+                        if (!result) {
+                            return res.status(401).json({
+                                error: { message: 'Incorrect Password.' }
+                            })
+                        }
+                        const response = {
+                            id: comp.id,
+                            pathname: comp.pathname,
+                            title: comp.title
+                        }
+                        res.status(201).json(response)
+                    })
+                    .catch(next)
+            })
+            .catch(err => {
+                return res.status(401).json({
+                    error: { message: err.message }
+                })
+            })
     })
 
 compRouter
