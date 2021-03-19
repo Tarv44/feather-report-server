@@ -103,7 +103,7 @@ CompRouter
     })
 
 CompRouter
-    .route('/:pathname')
+    .route('/:pathname/products')
     .get((req, res, next) => {
         const db = req.app.get('db')
         const response = {}
