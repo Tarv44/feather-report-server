@@ -113,7 +113,11 @@ CompRouter
                     throw new Error('Could not find company with given pathname.')
                 }
                 const { id, title, email } = co
-                response.id = id, response.title = title, response.email = email
+                response.company = {
+                    id,
+                    title,
+                    email
+                }
                 ProductService.getByCompany(db, id)
                     .then(prods => {
                         const ProductFeatures = prods.map(p => {
