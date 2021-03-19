@@ -6,6 +6,7 @@ const CompanyService = require('./companies-service')
 const ProductService = require('../products/products-service')
 const FeaturesService = require('../features/features-service')
 const CategoryService = require('../categories/categories-service')
+const FeatService = require('../features/features-service')
 
 const CompRouter = express.Router()
 const jsonParser = express.json()
@@ -102,7 +103,7 @@ CompRouter
     })
 
 CompRouter
-    .route('/:pathname/products')
+    .route('/:pathname')
     .get((req, res, next) => {
         const db = req.app.get('db')
         const response = {}
@@ -125,8 +126,16 @@ CompRouter
                             response.products = prods
                             CategoryService.getByCompany(db, id)
                                 .then(cats => {
-                                    response.categories = cats
-                                    res.status(200).json(response)
+                                    const CatFeatures = cats.map(c => {
+                                        return FeatService.getByCategory(db, c.id)
+                                            .then(feats => {
+                                                c.features = feats
+                                            })
+                                    })
+                                    Promise.all(CatFeatures).then(() => {
+                                        response.categories = cats
+                                        res.status(200).json(response)
+                                    })
                                 })
                                 .catch(next)
                         })

@@ -21,6 +21,13 @@ const FeatService = {
         .first()
     },
 
+    getByCategory(knex, category) {
+      return knex
+        .from('features')
+        .select('id', 'title')
+        .where('category', category)
+    },
+
     getByProduct(knex, product) {
       return knex
         .from('product_features')
