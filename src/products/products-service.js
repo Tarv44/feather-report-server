@@ -13,7 +13,7 @@ const ProdService = {
         })
     },
 
-    insertProductFeatures(knex, feature) {
+    insertProductFeature(knex, feature) {
       return knex
         .insert(feature)
         .into('product_features')
@@ -43,11 +43,21 @@ const ProdService = {
         .where({ id })
         .delete()
     },
+
+    deleteProductFeature(knex, feature, product) {
+      return knex('product_features')
+        .where({feature, product})
+        .delete()
+    },
   
     updateProduct(knex, id, newProductFields) {
       return knex('products')
         .where({ id })
         .update(newProductFields)
+        .returning('*')
+        .then(rows => {
+          return rows[0]
+        })
     },
   }
   

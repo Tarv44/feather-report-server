@@ -126,16 +126,8 @@ CompRouter
                             response.products = prods
                             CategoryService.getByCompany(db, id)
                                 .then(cats => {
-                                    const CatFeatures = cats.map(c => {
-                                        return FeatService.getByCategory(db, c.id)
-                                            .then(feats => {
-                                                c.features = feats
-                                            })
-                                    })
-                                    Promise.all(CatFeatures).then(() => {
-                                        response.categories = cats
-                                        res.status(200).json(response)
-                                    })
+                                    response.categories = cats
+                                    res.status(200).json(response)
                                 })
                                 .catch(next)
                         })

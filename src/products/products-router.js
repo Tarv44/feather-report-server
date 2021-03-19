@@ -32,7 +32,7 @@ ProdRouter
                 const FeatInserts = features
                     .map(feature => {
                         const newFeat = { feature, product: prod.id }
-                        return ProdService.insertProductFeatures(db, newFeat)
+                        return ProdService.insertProductFeature(db, newFeat)
                     })
                 Promise
                     .all(FeatInserts)
@@ -41,6 +41,44 @@ ProdRouter
                             .then(feats => {
                                 response.features = feats
                                 return res.status(201).json(response)
+                            })
+                    })
+            })
+    })
+    .patch(jsonParser, (req, res, next) => {
+        const db = req.app.get('db')
+        const { id, title, price, brand, category, link, description, company, features} = req.body
+
+        if (!id) {
+            return res.status(401).json({
+                error: { message: "Missing 'id' in request body."}
+            })
+        }
+
+        const productUpdate = { title, price, brand, category, link, description, company }
+
+        ProdService.updateProduct(db, id, productUpdate)
+            .then(p => {
+                FeatService.getByProduct(db, id)
+                    .then(feats => {
+                        const featIds = feats.map(f => { return f.id })
+                        const removed = featIds.filter(f => !features.includes(f))
+                        const added = features.filter(f => !featIds.includes(f))
+                        const FeatAdds = added.map(f => {
+                            const newFeat = {feature: f, product: id}
+                            return ProdService.insertProductFeature(db, newFeat)
+                        })
+                        const FeatDeletes = removed.map(f => {
+                            return ProdService.deleteProductFeature(db, f, id)
+                        })
+                        Promise
+                            .all(FeatAdds.concat(FeatDeletes))
+                            .then(()=> {
+                                FeatService.getByProduct(db, id)
+                                    .then(feats => {
+                                        p.features = feats
+                                        return res.status(201).json(p)
+                                    })
                             })
                     })
             })
