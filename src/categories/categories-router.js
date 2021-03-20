@@ -43,11 +43,6 @@ CatRouter
         FeatService
             .getByCategory(db, catId)
             .then(feats => {
-                if (feats.length === 0) {
-                    return res.status(200).json({
-                        message: "No features in category or category doesn't exist."
-                    })
-                }
                 return res.status(200).json(feats)
             })
     })
