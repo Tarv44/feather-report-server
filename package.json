@@ -14,6 +14,9 @@
     "deploy": "git push heroku main",
     "seed": "psql -U jonahtarver -d feather_report -f ./seeds/seeds.feather_report.sql"
   },
+  "engines": {
+    "node": "v14.15.1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
