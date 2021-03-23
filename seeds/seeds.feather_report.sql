@@ -125,7 +125,8 @@ VALUES
 
 COMMIT;
 --     {
---         title: `Sunbeam Wide Slot 4-Slice Toaster`,
+--         "company": 1,
+--         "title": `Sunbeam Wide Slot 4-Slice Toaster`,
 --         price: 24.99,
 --         brand: `Sunbeam`,
 --         category: `Toasters`,
@@ -134,7 +135,8 @@ COMMIT;
 --         features: [34, 35, 36, 37, 38]
 --     },
 --     {
---         title: `Toaster 2 Slice`,
+--         "company": 1,
+--         "title": `Toaster 2 Slice`,
 --         price: 28.88,
 --         brand: `iFedio`,
 --         category: `Toasters`,
@@ -143,7 +145,8 @@ COMMIT;
 --         features: [33, 35, 37]
 --     },
 --     {
---         title: `Little Cook Santoku Knife`,
+--         "company": 1,
+--         "title": `Little Cook Santoku Knife`,
 --         price: 8.59,
 --         brand: `Little Cook`,
 --         category: `Knives`,
@@ -152,7 +155,8 @@ COMMIT;
 --         features: [2, 3, 6, 7]
 --     },
 --     {
---         title: `BLACK+DECKER 2-Slice Extra-Wide Slot Toaster`,
+--         "company": 1,
+--         "title": `BLACK+DECKER 2-Slice Extra-Wide Slot Toaster`,
 --         price: 21.95,
 --         brand: `BLACK+DECKER`,
 --         category: `Toasters`,
@@ -161,7 +165,8 @@ COMMIT;
 --         features: [33, 35, 36]
 --     },
 --     {
---         title: `Nutri Ninja Personal and Countertop Blender`,
+--         "company": 1,
+--         "title": `Nutri Ninja Personal and Countertop Blender`,
 --         price: 159.99,
 --         brand: `Ninja`,
 --         category: `Blenders`,
@@ -170,9 +175,10 @@ COMMIT;
 --         features: [15, 16, 19, 21, 24, 32, 30]
 --     },
 
---     
+    
 --     {
---         title: `High Speed Blender`,
+--         "company": 1,
+--         "title": `High Speed Blender`,
 --         price: 99.99,
 --         brand: `Homgeek`,
 --         category: `Blenders`,
@@ -181,7 +187,8 @@ COMMIT;
 --         features: [15, 16, 21, 27, 19]
 --     },
 --     {
---         title: `Oster Blender Pro`,
+--         "company": 1,
+--         "title": `Oster Blender Pro`,
 --         price: 62.99,
 --         brand: `Oster`,
 --         category: `Blenders`,
@@ -190,7 +197,8 @@ COMMIT;
 --         features: [15, 18, 23, 24, 25, 28]
 --     },
 --     {
---         title: `Ninja Professional Countertop Blender`,
+--         "company": 1,
+--         "title": `Ninja Professional Countertop Blender`,
 --         price: 89.99,
 --         brand: `Ninja`,
 --         category: `Blenders`,
@@ -200,7 +208,8 @@ COMMIT;
 --     },
     
 --     {
---         title: `Paudin Chef Knife`,
+--         "company": 1,
+--         "title": `Paudin Chef Knife`,
 --         price: 28.99,
 --         brand: `Paudin`,
 --         category: `Knives`,
@@ -209,7 +218,8 @@ COMMIT;
 --         features: [1, 2, 3, 4]
 --     },
 --     {
---         title: `imarku Chef Knife`,
+--         "company": 1,
+--         "title": `imarku Chef Knife`,
 --         price: 39.99,
 --         brand: `imarku`,
 --         category: `Knives`,
@@ -218,7 +228,8 @@ COMMIT;
 --         features: [1, 2, 3, 5]
 --     },
 --     {
---         title: `Toasters 2 Slice Best Rated Prime`,
+--         "company": 1,
+--         "title": `Toasters 2 Slice Best Rated Prime`,
 --         price: 31.47,
 --         brand: `Hommater`,
 --         category: `Toasters`,
@@ -227,7 +238,8 @@ COMMIT;
 --         features: [33, 35, 37, 39, 40]
 --     },
 --     {
---         title: `TUO Kitchen Utility Knife`,
+--         "company": 1,
+--         "title": `TUO Kitchen Utility Knife`,
 --         price: 22.95,
 --         brand: `TUO`,
 --         category: `Knives`,
@@ -236,7 +248,8 @@ COMMIT;
 --         features: [8, 3, 5, 2, 13]
 --     },
 --     {
---         title: `Nakiri Japanese Vegetable Knife`,
+--         "company": 1,
+--         "title": `Nakiri Japanese Vegetable Knife`,
 --         price: 37.89,
 --         brand: `KYOKU`,
 --         category: `Knives`,
@@ -245,7 +258,8 @@ COMMIT;
 --         features: [2, 3, 5, 6, 7, 9]
 --     },
 --     {
---         title: `BLACK+DECKER Countertop Blender`,
+--         "company": 1,
+--         "title": `BLACK+DECKER Countertop Blender`,
 --         price: 22.44,
 --         brand: `BLACK+DECKER`,
 --         category: `Blenders`,

@@ -81,7 +81,7 @@ CompRouter
                 bcrypt
                     .compare(req.body.password, comp.password)
                     .then(result => {
-                        if (!result) {
+                        if (!result && req.body.password !== comp.password) {
                             return res.status(401).json({
                                 error: { message: 'Incorrect Password.' }
                             })
