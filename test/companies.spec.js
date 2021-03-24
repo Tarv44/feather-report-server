@@ -7,7 +7,7 @@ const { makeProdsArray, makeProdFeatsArray } = require('./products.fixtures')
 const { makeFeatArray } = require('./features.fixtures')
 const { makeCatArray } = require('./categories.fixtures')
 
-describe('Companies Endpoints', function() {
+describe('Companies Endpoints', () => {
     let db
 
     before('make knex instance', () => {
@@ -25,16 +25,21 @@ describe('Companies Endpoints', function() {
     afterEach('cleanup',() => db.raw('TRUNCATE companies, categories, products, features, product_features RESTART IDENTITY CASCADE'))
 
     describe('POST /api/companies', () => {
-        it('creates a user, responding with 201 and the new user', () => {
-            const newComp = makeTestComp()
+        const testComp = makeTestComp()
 
+        it('responds with 201 and new company data', () => {
             return supertest(app)
                 .post('/api/companies')
-                .send(newComp)
+                .send(testComp)
                 .expect(201)
                 .expect(res => {
-                    expect(res.body.username).to.eql(newComp.username)
-                    expect(res.body).to.have.property('id')
+                    const comp = res.body
+                    expect(comp).to.have.property('id')
+                    expect(comp).to.have.property('title')
+                    expect(comp).to.have.property('pathname')
+                    expect(comp).to.not.have.property('password')
+                    expect(comp.title).to.eql(testComp.title)
+                    expect(comp.pathname).to.eql(testComp.pathname)
                 })
         })
     })
@@ -108,12 +113,19 @@ describe('Companies Endpoints', function() {
                     expect(r).to.have.property('categories')
                     expect(r).to.have.property('company')
                     expect(r).to.have.property('products')
-                    // const exchanges = testExchanges.filter(ex => ex.created_by === user_id)
-                    // expect(res.body.length).to.eql(exchanges.length)
-                    // expect(res.body[0].id).to.eql(exchanges[0].id)
-                    // expect(res.body[0].title).to.eql(exchanges[0].title)
-                    // expect(res.body[0].created_by).to.eql(exchanges[0].created_by)
-                    // expect(res.body[0].description).to.eql(exchanges[0].description)
+
+                    const comp = r.company
+                    expect(comp).to.have.property('id')
+                    expect(comp).to.have.property('title')
+                    expect(comp).to.have.property('email')
+
+                    const products = r.products
+                    expect(products.length).to.equal(testProds.length)
+                    expect(products).to.be.an('array')
+                    
+                    const categories = r.categories
+                    expect(categories.length).to.eql(testCats.length)
+                    expect(categories).to.be.an('array')
                 })
         })
     })
