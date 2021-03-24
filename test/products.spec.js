@@ -21,9 +21,7 @@ describe('Products Endpoints', () => {
     after('disconnect from db', () => db.destroy())
 
     before('clean the table', () => db.raw('TRUNCATE companies, categories, products, features, product_features RESTART IDENTITY CASCADE'))
-
-    beforeEach('cleanup',() => db.raw('TRUNCATE companies, categories, products, features, product_features RESTART IDENTITY CASCADE'))
-
+    
     const testComp = makeTestComp()
     const testCats = makeCatArray()
     const testProds = makeProdsArray()
