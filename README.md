@@ -1,26 +1,37 @@
-# Express Boilerplate!
+# Feather Report Server
 
-This is a boilerplate project used for starting new projects!
+### Summary
+[Live Demo](https://featherreport.biz/)
 
-## Set up
+API server for [Feather Report Client](https://github.com/Tarv44/feather-report-client).
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+This is my second fullstack project that I've built. It provides a straightforward platform for small businesses to upload products and give their customers a useful compare tool.
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+### Enpoints:
 
-## Scripts
+* POST /companies - creates new company
+* POST /companies/login - verifies login data and returns company data
+* GET /companies/:pathname/products - returns all product data for company with given pathname
 
-Start the application `npm start`
+* POST /products - creates new product
+* PATCH /products - updates product
 
-Start nodemon for the application `npm run dev`
+* POST /categories - creates new category
+* GET /categories/:cat_id/features - returns all features for a given category
 
-Run the tests `npm test`
+* POST /features - creates new feature
 
-## Deploying
+### Technology used:
+* PostgreSQL
+* Express
+* Node
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's main branch.
+***
+
+![Landing Page](./screenshots/landing.png)
+
+![Admin Page](./screenshots/admin.png)
+
+![Browser Page](./screenshots/browser.png)
+
+![Compare Page](./screenshots/compare.png)

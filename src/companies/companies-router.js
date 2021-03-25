@@ -93,7 +93,11 @@ CompRouter
                         }
                         res.status(201).json(response)
                     })
-                    .catch(next)
+                    .catch(err => {
+                        return res.status(401).json({
+                            error: { message: err.message }
+                        })
+                    })
             })
             .catch(err => {
                 return res.status(401).json({
